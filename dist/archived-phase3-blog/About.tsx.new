@@ -1,0 +1,259 @@
+import React from 'react';
+import { Check } from 'lucide-react';
+
+const About: React.FC = () => {
+  const services = [
+    {
+      title: 'Digitalisation des processus internes',
+      highlight: 'Pour Optimiser Votre Efficacité',
+    },
+    {
+      title: 'Digitalisation du processus crédit',
+      highlight: 'Pour Accélérer Vos Décisions',
+    },
+    {
+      title: 'Automatisation des processus métiers',
+      highlight: 'Pour Gagner en Productivité',
+    },
+    {
+      title: 'Tableaux de bord & Pilotage',
+      highlight: 'Pour Piloter en Temps Réel',
+    },
+  ];
+
+  return (
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Background transparent - pas de fond */}
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Column - Content (EXACTEMENT comme DigitalSilk) */}
+          <div className="space-y-8 lg:space-y-10">
+            {/* Main Title - 2 lignes avec branding cyan/purple */}
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  Leonce Ouattara Studio
+                </span>
+              </h2>
+              <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                Spécialiste de Solutions Digitales pour Institutions Financières
+              </p>
+            </div>
+
+            {/* Services List avec Checkmarks cyan - EXACT layout DigitalSilk */}
+            <div className="space-y-5">
+              {services.map((service, index) => (
+                <div key={index} className="flex items-start gap-4 group">
+                  {/* Checkmark cyan EXACT comme DigitalSilk */}
+                  <div className="flex-shrink-0 w-6 h-6 bg-cyan-400 rounded flex items-center justify-center mt-1.5 group-hover:scale-110 transition-transform duration-300">
+                    <Check size={16} className="text-[#0a1628] font-bold" strokeWidth={3} />
+                  </div>
+                  
+                  {/* Service Text - Layout EXACT comme DigitalSilk */}
+                  <div className="flex-1">
+                    <p className="text-white text-lg md:text-xl leading-relaxed">
+                      {service.title}{' '}
+                      <span className="text-cyan-400 font-semibold">
+                        {service.highlight}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Description paragraph - Position EXACTE comme DigitalSilk */}
+            <div className="pt-4">
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+                Leonce Ouattara Studio est votre partenaire de confiance pour la transformation digitale du secteur financier. Nous créons des solutions sur mesure qui digitalisent vos processus métiers, automatisent vos workflows et vous donnent une visibilité en temps réel sur vos opérations. Nous travaillons main dans la main avec banques, assurances et institutions de microfinance pour transformer leurs processus papier en solutions digitales performantes, sécurisées et conformes aux standards du secteur.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column - Mockup Showcase (EXACT style DigitalSilk) */}
+          <div className="relative hidden lg:block h-[700px]">
+            {/* Trophy/Award Icon - Position EXACTE */}
+            <div className="absolute bottom-16 left-8 z-20">
+              <div className="relative group">
+                <div className="w-28 h-36 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-3xl flex items-center justify-center shadow-2xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                  <div className="text-center">
+                    <svg className="w-14 h-14 text-yellow-900 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <p className="text-yellow-900 font-bold text-xs">Excellence</p>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-yellow-400 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+              </div>
+            </div>
+
+            {/* Stack of Website Mockups - Position EXACTE comme DigitalSilk */}
+            <div className="relative h-full">
+              {/* Back Mockup (Bottom Right) */}
+              <div 
+                className="absolute top-32 right-0 w-[360px] h-[460px] rounded-xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border-2 border-white/10"
+                style={{
+                  transform: 'perspective(1200px) rotateY(-18deg) rotateX(4deg)',
+                  zIndex: 1,
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-5">
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="space-y-4">
+                    <div className="h-7 bg-cyan-500/20 rounded w-3/4" />
+                    <div className="h-40 bg-white/5 rounded" />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="h-20 bg-purple-500/20 rounded" />
+                      <div className="h-20 bg-cyan-500/20 rounded" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Middle Mockup (Center Left) */}
+              <div 
+                className="absolute top-20 left-0 w-[380px] h-[480px] rounded-xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border-2 border-white/10"
+                style={{
+                  transform: 'perspective(1200px) rotateY(12deg) rotateX(3deg)',
+                  zIndex: 2,
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-5">
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  </div>
+                  
+                  {/* Hero Section */}
+                  <div className="space-y-4">
+                    <div className="h-9 bg-purple-400/30 rounded w-2/3" />
+                    <div className="h-5 bg-white/10 rounded w-1/2" />
+                    <div className="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
+                      <div className="text-purple-200 text-6xl opacity-20">🏦</div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="h-14 bg-white/5 rounded" />
+                      <div className="h-14 bg-white/5 rounded" />
+                      <div className="h-14 bg-white/5 rounded" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Front Mockup (Top Center) - PRINCIPAL */}
+              <div 
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[500px] rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] border-3 border-white/20"
+                style={{
+                  transform: 'translateX(-50%) perspective(1200px) rotateY(-3deg) rotateX(2deg)',
+                  zIndex: 3,
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-br from-blue-900 via-indigo-900 to-cyan-900">
+                  {/* Browser chrome amélioré */}
+                  <div className="bg-gradient-to-b from-gray-800 to-gray-900 px-4 py-3 border-b border-cyan-500/30">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500 shadow-lg shadow-red-500/50" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50" />
+                      <div className="w-3 h-3 rounded-full bg-green-500 shadow-lg shadow-green-500/50" />
+                      <div className="flex-1 h-7 bg-white/5 rounded-lg ml-3 flex items-center px-3">
+                        <div className="w-3 h-3 bg-cyan-400/50 rounded-full mr-2" />
+                        <div className="h-3 bg-white/10 rounded w-2/3" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-7">
+                    {/* Header */}
+                    <div className="mb-7">
+                      <h3 className="text-white font-bold text-2xl mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                        Système de Crédit Digital
+                      </h3>
+                      <p className="text-gray-400 text-sm flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                        Plateforme en ligne
+                      </p>
+                    </div>
+
+                    {/* Stats Cards avec glow effect */}
+                    <div className="grid grid-cols-2 gap-4 mb-7">
+                      <div className="relative group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl blur opacity-50" />
+                        <div className="relative bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-xl">
+                          <p className="text-white/90 text-xs font-medium mb-1 uppercase">Dossiers</p>
+                          <p className="text-white font-bold text-3xl">2.5K</p>
+                        </div>
+                      </div>
+                      
+                      <div className="relative group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl blur opacity-50" />
+                        <div className="relative bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-xl">
+                          <p className="text-white/90 text-xs font-medium mb-1 uppercase">Approuvés</p>
+                          <p className="text-white font-bold text-3xl">87%</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Process Steps */}
+                    <div className="space-y-3">
+                      <div className="bg-white/5 rounded-lg p-4 flex items-center justify-between border border-cyan-500/20">
+                        <span className="text-gray-300 text-sm">1. Analyse dossier</span>
+                        <span className="text-cyan-400 text-xs font-semibold">Automatique</span>
+                      </div>
+                      <div className="bg-white/5 rounded-lg p-4 flex items-center justify-between border border-purple-500/20">
+                        <span className="text-gray-300 text-sm">2. Scoring crédit</span>
+                        <span className="text-purple-400 text-xs font-semibold">IA</span>
+                      </div>
+                      <div className="bg-white/5 rounded-lg p-4 flex items-center justify-between border border-cyan-500/20">
+                        <span className="text-gray-300 text-sm">3. Décision</span>
+                        <span className="text-green-400 text-xs font-semibold">Temps réel</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Elements subtils */}
+              <div className="absolute top-10 right-10 w-24 h-24 bg-gradient-to-br from-cyan-400 to-cyan-500 rounded-full opacity-10 blur-2xl animate-float" />
+              <div className="absolute bottom-10 left-16 w-32 h-32 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full opacity-10 blur-2xl animate-float-delayed" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Custom CSS pour animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+          animation: float-delayed 5s ease-in-out infinite 1s;
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default About;

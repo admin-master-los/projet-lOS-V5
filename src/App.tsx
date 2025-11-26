@@ -1,8 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import BackgroundAnimation from './components/BackgroundAnimation';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { useAuth } from './contexts/AuthContext';
+
+// Composants SEO & Analytics
+import SEO from './components/SEO';
+import GoogleAnalytics from './components/GoogleAnalytics';
+import StructuredData from './components/StructuredData';
+
+// Composants de layout
 import Header from './components/Header';
+import Footer from './components/Footer';
+
+// Composants de la page d'accueil
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
@@ -12,214 +21,181 @@ import WhyChooseUs from './components/WhyChooseUs';
 import Process from './components/Process';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ChatBot from './components/ChatBot';
 
-
-// 🆕 Imports Admin
-import { AuthProvider } from './admin/hooks/useAuth';
-import { QueryProvider } from './admin/providers/QueryProvider';
-import ProtectedRoute from './admin/components/ProtectedRoute';
-import AdminLayout from './admin/components/layout/AdminLayout';
-import Login from './admin/pages/Login';
-import Dashboard from './admin/pages/Dashboard';
-
-// 🆕 Navigation CRUD
-import NavigationList from './admin/pages/navigation/NavigationList';
-import NavigationCreate from './admin/pages/navigation/NavigationCreate';
-import NavigationEdit from './admin/pages/navigation/NavigationEdit';
-
-// 🆕 Services CRUD
-import ServiceList from './admin/pages/services/ServiceList';
-import ServiceCreate from './admin/pages/services/ServiceCreate';
-import ServiceEdit from './admin/pages/services/ServiceEdit';
-
-// 🆕 Sectors CRUD
-import AdminSectors from './admin/pages/Sectors';
-
-// 🆕 Projects CRUD
-import Projects from './admin/pages/Projects';
-import ProjectForm from './admin/pages/ProjectForm';
-
-// 🆕 Blog CRUD
-import BlogAdmin from './admin/pages/Blog';
-import BlogForm from './admin/pages/BlogForm';
-import BlogCategories from './admin/pages/BlogCategories';
-import BlogCommentsAdmin from './admin/pages/BlogCommentsAdmin';
-
-// 🆕 Meeting Management
-import Meeting from './admin/pages/Meeting';
-
-// 🆕 Analytics
-import Analytics from './admin/pages/Analytics';
-
-// 🆕 Contacts
-import Contacts from './admin/pages/Contacts';
-
-// 🆕 Newsletters
-import Newsletters from './admin/pages/Newsletters';
-
-// 🆕 Skills, Chatbot, Settings
-import Skills from './admin/pages/Skills';
-import Chatbot from './admin/pages/Chatbot';
-import Settings from './admin/pages/Settings';
-
-// 🆕 Booking Public
-import BookingPage from './pages/BookingPage';
-
-// 🆕 Blog Frontend Public
-import BlogTech from './pages/BlogTech';
-import BlogArticlePage from './pages/BlogArticlePage';
-import Sitemap from './pages/Sitemap';
-import ScrollToTop from './components/ScrollToTop';
-import GoogleAnalytics from './components/GoogleAnalytics';
-import { NotificationProvider } from './contexts/NotificationContext';
-
-// 🆕 Page À Propos
+// Pages
 import AboutPage from './pages/AboutPage';
+import BlogList from './pages/BlogList';
+import BlogPost from './pages/BlogPost';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+
+// Route protégée pour l'admin
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user } = useAuth();
+  
+  if (!user) {
+    return <Navigate to="/admin/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <GoogleAnalytics />
-      <QueryProvider>
-        <AuthProvider>
-          <NotificationProvider>
-            {/* Toast notifications */}
-            <Toaster position="top-right" />
+    <HelmetProvider>
+      <BrowserRouter>
+        {/* Données structurées Schema.org (toutes les pages) */}
+        <StructuredData />
+        
+        {/* Google Analytics (toutes les pages) */}
+        <GoogleAnalytics />
+        
+        <Routes>
+          {/* PAGE D'ACCUEIL */}
+          <Route 
+            path="/" 
+            element={
+              <>
+                <SEO 
+                  title="Leonce Ouattara Studio - Digitalisation Secteur Financier"
+                  description="Studio de développement web spécialisé dans la digitalisation des banques, assurances et institutions de microfinance en Afrique. Expertise en solutions sur mesure, zéro papier."
+                  keywords="développement web, digitalisation bancaire, fintech Afrique, transformation digitale, zéro papier, banque digitale, microfinance, Côte d'Ivoire"
+                  url="https://leonceouattarastudiogroup.site"
+                  image="https://leonceouattarastudiogroup.site/og-image.jpg"
+                />
+                <Header />
+                <main>
+                  <Hero />
+                  <About />
+                  <Services />
+                  <Sectors />
+                  <Portfolio />
+                  <WhyChooseUs />
+                  <Process />
+                  <Blog />
+                  <Contact />
+                </main>
+                <Footer />
+              </>
+            } 
+          />
 
-          <Routes>
-            {/* Page principale */}
-            <Route
-              path="/"
-              element={
-                <div className="min-h-screen bg-[#0A0A0B] text-white overflow-x-hidden">
-                  {/* Animated Background */}
-                  <BackgroundAnimation />
+          {/* PAGE À PROPOS */}
+          <Route 
+            path="/about" 
+            element={
+              <>
+                <SEO 
+                  title="À Propos - Notre Expertise en Digitalisation Financière"
+                  description="Découvrez Leonce Ouattara Studio, votre partenaire de confiance pour la transformation digitale du secteur financier en Afrique. +10 ans d'expérience, solutions sur mesure, support 24/7."
+                  keywords="expertise digitalisation, transformation digitale, développement web Afrique, fintech, agence web Côte d'Ivoire"
+                  url="https://leonceouattarastudiogroup.site/about"
+                  image="https://leonceouattarastudiogroup.site/og-image-about.jpg"
+                />
+                <Header />
+                <AboutPage />
+                <Footer />
+              </>
+            } 
+          />
 
-                  {/* Main Content */}
-                  <div className="relative z-10">
-                    <Header />
-                    <main>
-                      <Hero />
-                      <About />
-                      <Services />
-                      <Sectors />
-                      <Portfolio />
-                      <WhyChooseUs />
-                      <Process />
-                      <Blog />
-                      <Contact />
-                    </main>
-                    <Footer />
+          {/* PAGE BLOG (LISTE) */}
+          <Route 
+            path="/blog" 
+            element={
+              <>
+                <SEO 
+                  title="Blog - Actualités & Conseils Digitalisation Financière"
+                  description="Articles, guides et tendances sur la transformation digitale des banques, assurances et institutions financières en Afrique. Conseils d'experts, études de cas et best practices."
+                  keywords="blog fintech, actualités digitalisation bancaire, transformation digitale Afrique, conseils développement web, études de cas"
+                  url="https://leonceouattarastudiogroup.site/blog"
+                  image="https://leonceouattarastudiogroup.site/og-image-blog.jpg"
+                />
+                <Header />
+                <BlogList />
+                <Footer />
+              </>
+            } 
+          />
+
+          {/* PAGE ARTICLE DE BLOG (DYNAMIQUE) */}
+          <Route 
+            path="/blog/:slug" 
+            element={
+              <>
+                {/* SEO sera personnalisé dans BlogPost.tsx avec les données de l'article */}
+                <Header />
+                <BlogPost />
+                <Footer />
+              </>
+            } 
+          />
+
+          {/* PAGE LOGIN ADMIN */}
+          <Route 
+            path="/admin/login" 
+            element={
+              <>
+                <SEO 
+                  title="Admin Login - Espace Administrateur"
+                  description="Connexion à l'espace administrateur Leonce Ouattara Studio"
+                  url="https://leonceouattarastudiogroup.site/admin/login"
+                  robots="noindex, nofollow"
+                />
+                <AdminLogin />
+              </>
+            } 
+          />
+
+          {/* PAGE DASHBOARD ADMIN (PROTÉGÉE) */}
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute>
+                <>
+                  <SEO 
+                    title="Dashboard Admin - Gestion du Site"
+                    description="Tableau de bord administrateur Leonce Ouattara Studio"
+                    url="https://leonceouattarastudiogroup.site/admin/dashboard"
+                    robots="noindex, nofollow"
+                  />
+                  <AdminDashboard />
+                </>
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* ROUTE 404 - PAGE NON TROUVÉE */}
+          <Route 
+            path="*" 
+            element={
+              <>
+                <SEO 
+                  title="Page Non Trouvée - 404"
+                  description="La page que vous recherchez n'existe pas"
+                  url="https://leonceouattarastudiogroup.site/404"
+                  robots="noindex, nofollow"
+                />
+                <Header />
+                <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+                  <div className="text-center px-4">
+                    <h1 className="text-6xl font-bold text-white mb-4">404</h1>
+                    <p className="text-2xl text-gray-400 mb-8">Page non trouvée</p>
+                    <a 
+                      href="/" 
+                      className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:scale-105 transition-transform"
+                    >
+                      Retour à l'accueil
+                    </a>
                   </div>
-
-                  {/* Floating ChatBot */}
-                  <ChatBot />
                 </div>
-              }
-            />
-
-            {/* 🆕 Page À Propos */}
-            <Route path="/about" element={<AboutPage />} />
-
-            {/* Page Blog Tech */}
-            <Route path="/blog-tech" element={<BlogTech />} />
-            
-            {/* Routes Blog Public */}
-            <Route path="/blog">
-              <Route index element={<BlogTech />} />
-              <Route path=":slug" element={<BlogArticlePage />} />
-            </Route>
-            
-            {/* Sitemap XML */}
-            <Route path="/sitemap.xml" element={<Sitemap />} />
-
-            {/* 🆕 Page Booking Public */}
-            <Route path="/reserver" element={<BookingPage />} />
-
-            {/* 🆕 Routes Admin */}
-            <Route path="/admin/login" element={<Login />} />
-            
-            {/* Admin routes avec layout */}
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }
-            >
-              {/* Redirect /admin to /admin/dashboard */}
-              <Route index element={<Navigate to="/admin/dashboard" replace />} />
-              
-              {/* Dashboard */}
-              <Route path="dashboard" element={<Dashboard />} />
-              
-              {/* 🆕 Navigation CRUD */}
-              <Route path="navigation">
-                <Route index element={<NavigationList />} />
-                <Route path="create" element={<NavigationCreate />} />
-                <Route path=":id/edit" element={<NavigationEdit />} />
-              </Route>
-              
-              {/* 🆕 Services CRUD */}
-              <Route path="services">
-                <Route index element={<ServiceList />} />
-                <Route path="create" element={<ServiceCreate />} />
-                <Route path=":id/edit" element={<ServiceEdit />} />
-              </Route>
-              
-              {/* 🆕 Sectors CRUD */}
-              <Route path="sectors" element={<AdminSectors />} />
-              
-              {/* 🆕 Projects CRUD */}
-              <Route path="projects">
-                <Route index element={<Projects />} />
-                <Route path="new" element={<ProjectForm />} />
-                <Route path=":id/edit" element={<ProjectForm />} />
-              </Route>
-              
-              {/* 🆕 Blog CRUD */}
-              <Route path="blog">
-                <Route index element={<BlogAdmin />} />
-                <Route path="new" element={<BlogForm />} />
-                <Route path=":id/edit" element={<BlogForm />} />
-                <Route path="categories" element={<BlogCategories />} />
-              </Route>
-              
-              {/* 🆕 Comments Management - Route dédiée */}
-              <Route path="comments" element={<BlogCommentsAdmin />} />
-              
-              {/* 🆕 Meeting Management */}
-              <Route path="meetings" element={<Meeting />} />
-              
-              {/* 🆕 Analytics */}
-              <Route path="analytics" element={<Analytics />} />
-              
-              {/* 🆕 Contacts */}
-              <Route path="contacts" element={<Contacts />} />
-              
-              {/* 🆕 Newsletters */}
-              <Route path="newsletters" element={<Newsletters />} />
-              
-              {/* 🆕 Skills Management */}
-              <Route path="skills" element={<Skills />} />
-              
-              {/* 🆕 Chatbot Management */}
-              <Route path="chatbot" element={<Chatbot />} />
-              
-              {/* 🆕 Settings */}
-              <Route path="settings" element={<Settings />} />
-              
-              {/* Autres routes admin seront ajoutées dans les prochaines phases */}
-            </Route>
-          </Routes>
-          </NotificationProvider>
-        </AuthProvider>
-      </QueryProvider>
-    </Router>
+                <Footer />
+              </>
+            } 
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

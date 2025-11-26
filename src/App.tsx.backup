@@ -8,6 +8,8 @@ import About from './components/About';
 import Services from './components/Services';
 import Sectors from './components/Sectors';
 import Portfolio from './components/Portfolio';
+import WhyChooseUs from './components/WhyChooseUs';
+import Process from './components/Process';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -105,6 +107,8 @@ function App() {
                       <Services />
                       <Sectors />
                       <Portfolio />
+                      <WhyChooseUs />
+                      <Process />
                       <Blog />
                       <Contact />
                     </main>
