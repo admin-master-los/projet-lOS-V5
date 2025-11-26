@@ -1,0 +1,29 @@
+# Robots.txt pour leonceouattarastudiogroup.site
+
+# Autoriser tous les robots
+User-agent: *
+Allow: /
+
+# Interdire les pages admin
+Disallow: /admin/
+Disallow: /admin/*
+
+# Interdire les fichiers API (si vous en avez)
+Disallow: /api/
+
+# Interdire les fichiers de build
+Disallow: /assets/
+
+# Sitemap
+Sitemap: https://leonceouattarastudiogroup.site/sitemap.xml
+
+# Paramètres spécifiques pour Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Paramètres spécifiques pour Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Délai entre les requêtes (en secondes)
+Crawl-delay: 1
