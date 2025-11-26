@@ -28,6 +28,7 @@ const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      <meta name="google-site-verification" content="T2n8BFQ87jDP7vWoLCpYW5r9pfl98408gHhsnmadY_0" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
