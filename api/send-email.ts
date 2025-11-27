@@ -133,7 +133,7 @@ const sendEmailViaResend = async (
   htmlContent: string
 ): Promise<boolean> => {
   const RESEND_API_KEY = process.env.RESEND_API_KEY
-  const SENDER_EMAIL = 'notifications@leonceouattarastudiogroup.site'
+  const SENDER_EMAIL = 'Leonce Ouattara Studio <noreply@notifications.leonceouattarastudiogroup.site>'
 
   if (!RESEND_API_KEY) {
     console.error('❌ RESEND_API_KEY is not configured')
