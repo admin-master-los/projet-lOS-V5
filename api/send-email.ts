@@ -1,4 +1,16 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+// API Route pour envoi sécurisé d'emails
+// Compatible avec Vercel sans dépendance @vercel/node
+
+// Types simples pour Request/Response
+interface VercelRequest {
+  method?: string
+  body: any
+}
+
+interface VercelResponse {
+  status: (code: number) => VercelResponse
+  json: (data: any) => void
+}
 
 // CORS headers
 const corsHeaders = {
@@ -45,6 +57,7 @@ interface EmailResponse {
   success: boolean
   clientSent?: boolean
   adminSent?: boolean
+  sent?: boolean
   error?: string
 }
 
@@ -509,8 +522,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const data = req.body as EmailData
 
     // Validation du type
-    if (!data.type) {
-      return res.status(400).json({ error: 'Missing type field' })
+    if (!data || typeof data !== 'object' || !('type' in data)) {
+      return res.status(400).json({ error: 'Missing or invalid type field' })
     }
 
     console.log(`📧 Processing ${data.type} email request...`)
@@ -600,7 +613,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Type non reconnu
-    return res.status(400).json({ error: `Unknown type: ${data.type}` })
+    return res.status(400).json({ error: `Unknown type: ${(data as any).type}` })
   } catch (error: any) {
     console.error('❌ Erreur globale:', error)
     return res.status(500).json({
